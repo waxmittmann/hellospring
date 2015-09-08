@@ -1,0 +1,56 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'spring-boot'
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.5.RELEASE")
+    }
+}
+
+jar {
+    baseName = 'hello-spring'
+    version =  '0.1.0'
+}
+
+repositories {
+    mavenCentral()
+}
+
+build {
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+}
+
+dependencies {
+    /* Compile */
+    //Spring boot
+    //Todo: Specify versions
+    compile "org.springframework.boot:spring-boot-starter-web"
+    compile "org.springframework.boot:spring-boot-starter-actuator"
+    compile 'org.springframework.boot:spring-boot-starter-data-jpa:1.2.5.RELEASE'
+    //Hibernate
+    compile "org.hibernate:hibernate-core:5.0.1.Final"
+    compile 'org.hibernate:hibernate-entitymanager:5.0.1.Final'
+    compile 'org.hibernate:hibernate-validator:5.1.1.Final'
+    compile 'org.hibernate:hibernate-jpamodelgen:5.0.1.Final'
+    //DB
+    compile 'org.postgresql:postgresql:9.4-1202-jdbc42'
+    compile 'org.hsqldb:hsqldb:2.3.2'
+    compile 'org.flywaydb:flyway-core'
+    //Utils (guava, commons)
+    compile group: 'com.google.guava', name: 'guava', version: '12.0'
+    compile 'org.apache.commons:commons-lang3:3.4'
+    compile 'org.apache.commons:commons-collections4:4.0'
+
+    /* Test */
+    testCompile "org.springframework.boot:spring-boot-starter-test"
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.3'
+}
